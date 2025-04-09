@@ -10,7 +10,7 @@ source:
   sha256: 779bffc3e3ab7059255a48ebf998f10b78f47c23a42d36dbb1fa4a66e149d7af
 
 build:
-  number: 0
+  number: 1
 
 requirements:
   build:
@@ -29,6 +29,7 @@ requirements:
   run:
     - python
     - numpy >=1.21.0
+    - exceptiongroup >=1.0.0  # [py<311]
 
 test:
   source_files:
