@@ -28,7 +28,7 @@ requirements:
     - pip
   run:
     - python
-    - numpy >=1.21.0
+    - numpy >=1.22.0
     - exceptiongroup >=1.0.0  # [py<311]
 
 test:
