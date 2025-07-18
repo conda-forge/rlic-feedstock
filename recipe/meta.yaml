@@ -49,8 +49,8 @@ about:
   home: https://github.com/neutrinoceros/rlic
   license: MIT
   license_file:
-    - LICENSE/LICENSE_rlic
-    - LICENSE/LICENSE_vectorplot
+    - LICENSE_rlic
+    - LICENSE_vectorplot
     - THIRDPARTY.yml
 
 extra:
