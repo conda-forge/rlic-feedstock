@@ -1,0 +1,8 @@
+diff --git a/LICENSE/LICENSE_rlic b/LICENSE_rlic
+similarity index 100%
+rename from LICENSE/LICENSE_rlic
+rename to LICENSE_rlic
+diff --git a/LICENSE/LICENSE_vectorplot b/LICENSE_vectorplot
+similarity index 100%
+rename from LICENSE/LICENSE_vectorplot
+rename to LICENSE_vectorplot

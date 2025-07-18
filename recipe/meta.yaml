@@ -8,6 +8,8 @@ package:
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/rlic-{{ version }}.tar.gz
   sha256: bd6f2fdf71e4c38b0dbf98cd5723dd6bbd12bd2a97a70d138b1103b997926ef2
+  patches:
+    - mv_licenses.patch
 
 build:
   number: 0
