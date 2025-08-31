@@ -10,8 +10,9 @@ source:
   sha256: d965cc96ff81c6500db259af82c6e1acde73a5d7ce46affcccacf2b6cc17881d
 
 build:
-  number: 0
-  skip: true  # [py<310 or python_impl == 'pypy']
+  number: 1
+  python_version_independent: true  # [is_abi3]
+  skip: true  # [is_abi3 and not is_python_min]
 
 requirements:
   build:
@@ -24,6 +25,7 @@ requirements:
     - make
     - maturin
   host:
+    - python-abi3  # [is_abi3]
     - python
     - maturin >=1.0,<2.0
     - pip
@@ -33,6 +35,10 @@ requirements:
     - exceptiongroup >=1.0.0  # [py<311]
 
 test:
+  requires:
+    - pip
+    - pytest
+    - abi3audit  # [is_abi3]
   source_files:
     - tests
   imports:
@@ -40,9 +46,8 @@ test:
   commands:
     - pip check
     - pytest -ra tests
-  requires:
-    - pip
-    - pytest
+    - abi3audit $SP_DIR/rlic/_core.abi3.so -s -v --assume-minimum-abi3 {{ python_min }}  # [unix and is_abi3]
+    - abi3audit %SP_DIR%/rlic/_core.pyd -s -v --assume-minimum-abi3 {{ python_min }}  # [win and is_abi3]
 
 about:
   summary: A minimal Line Integral Convolution extension for NumPy, written in Rust
