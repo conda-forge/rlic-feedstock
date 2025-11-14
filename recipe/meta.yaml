@@ -1,5 +1,5 @@
 {% set name = "rlic" %}
-{% set version = "0.5.1" %}
+{% set version = "0.5.2" %}
 
 package:
   name: {{ name|lower }}
@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/rlic-{{ version }}.tar.gz
-  sha256: d965cc96ff81c6500db259af82c6e1acde73a5d7ce46affcccacf2b6cc17881d
+  sha256: cfca1ed344f6fc664576cb7f5a18dc4586bd41e2ab7ddf8b439617eeef9b9cb3
 
 build:
-  number: 1
+  number: 0
   python_version_independent: true  # [is_abi3]
   skip: true  # [is_abi3 and not is_python_min]
 
