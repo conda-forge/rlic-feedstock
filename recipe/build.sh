@@ -1,19 +1,16 @@
 #!/usr/bin/env bash
-set -ex
+set -eux
 
 export CARGO_PROFILE_RELEASE_STRIP=symbols
 
 PLATFORM=$(uname)
 ARCH=$(uname -m)
 
-if [ $ARCH == 'x86_64' ] ; then
-  if [ $PLATFORM == 'Darwin' ] ; then
-    MATURIN_BUILD_ARGS="--no-default-features"
-  elif [ $PLATFORM == "Linux" ] ; then
-    MATURIN_BUILD_ARGS="--no-default-features -F branchless"
-  fi
+if [ $PLATFORM == "Linux" && $ARCH == 'x86_64' ] ; then
+  MATURIN_BUILD_ARGS="--release --no-default-features -F branchless"
+else
+  MATURIN_BUILD_ARGS="--release"
 fi
-MATURIN_BUILD_ARGS="$MATURIN_BUILD_ARGS --release"
 
 cargo-bundle-licenses \
   --format yaml \
