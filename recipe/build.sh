@@ -8,7 +8,7 @@ ARCH=$(uname -m)
 
 if [ $ARCH == 'x86_64' ] ; then
   if [ $PLATFORM == 'Darwin' ] ; then
-    MATURIN_BUILD_ARGS="--no-default-features -F fma"
+    MATURIN_BUILD_ARGS="--no-default-features"
   elif [ $PLATFORM == "Linux" ] ; then
     MATURIN_BUILD_ARGS="--no-default-features -F branchless"
   fi
