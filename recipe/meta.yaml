@@ -29,12 +29,11 @@ requirements:
   host:
     - python-abi3  # [is_abi3]
     - python
-    - maturin >=1.0,<2.0
+    - maturin >=1.10,<2.0
     - pip
   run:
     - python
-    - numpy >=1.22.0
-    - exceptiongroup >=1.0.0  # [py<311]
+    - numpy >=1.23.2
 
 test:
   requires:
