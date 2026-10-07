@@ -9,7 +9,7 @@ ARCH=$(uname -m)
 
 MATURIN_BUILD_ARGS="--release"
 if [ $ARCH == 'x86_64' ] ; then
-  MATURIN_BUILD_ARGS="$MATURIN_BUILD_ARGS --no-default-features -F fma"
+  MATURIN_BUILD_ARGS="$MATURIN_BUILD_ARGS --no-default-features"
 fi
 
 cargo-bundle-licenses \
