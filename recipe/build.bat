@@ -11,8 +11,9 @@ cargo-bundle-licenses ^
     --output %SRC_DIR%\THIRDPARTY.yml ^
     || goto :error
 popd
-REM Run the maturin build via pip
+
 set PYTHONUTF8=1
 set PYTHONIOENCODING="UTF-8"
 set TMPDIR=tmpbuild_%PY_VER%
-%PYTHON% -m pip install . -vv
+maturin build -F pyo3/abi3-py311
+%PYTHON% -m pip install rlic --find-links target\wheels -vv
