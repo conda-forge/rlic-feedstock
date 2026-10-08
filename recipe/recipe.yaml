@@ -1,0 +1,82 @@
+schema_version: 1
+
+context:
+  name: rlic
+  version: "0.5.3"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/rlic-${{ version }}.tar.gz
+  sha256: a5a249df38d3cf9203a6cd5ff4e585db1a2c95ea0e2e5f8365025f348ada96e9
+
+build:
+  number: 1
+  skip: is_abi3 and not is_python_min
+  python:
+    version_independent: ${{ true if is_abi3 }}
+
+requirements:
+  build:
+    - if: build_platform != target_platform
+      then: python
+    - if: build_platform != target_platform
+      then: cross-python_${{ target_platform }}
+    - ${{ stdlib('c') }}
+    - ${{ compiler('c') }}
+    - ${{ compiler('cxx') }}
+    - ${{ compiler('rust') }}
+    - cargo-bundle-licenses
+    - cmake
+    - make
+    - maturin
+  host:
+    - if: is_abi3
+      then: python-abi3
+    - python
+    - maturin >=1.0,<2.0
+    - pip
+  run:
+    - python
+    - numpy >=1.22.0
+    - if: match(python, "<3.11")
+      then: exceptiongroup >=1.0.0
+
+tests:
+  - python:
+      python_version:
+        - ${{ python_min }}.*
+        - "*"
+      imports:
+        - rlic
+      pip_check: true
+  - files:
+      source:
+        - tests
+    requirements:
+      run:
+        - pip
+        - pytest
+        - if: is_abi3
+          then: abi3audit
+    script:
+      - pytest -ra tests
+      - if: unix and is_abi3
+        then: abi3audit $SP_DIR/rlic/_core.abi3.so -s -v --assume-minimum-abi3 ${{ python_min }}
+      - if: win and is_abi3
+        then: abi3audit %SP_DIR%/rlic/_core.pyd -s -v --assume-minimum-abi3 ${{ python_min }}
+
+about:
+  summary: A minimal Line Integral Convolution extension for NumPy, written in Rust
+  license: MIT
+  license_file:
+    - LICENSE_rlic
+    - LICENSE_vectorplot
+    - THIRDPARTY.yml
+  homepage: https://github.com/neutrinoceros/rlic
+
+extra:
+  recipe-maintainers:
+    - neutrinoceros
