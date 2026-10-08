@@ -2,18 +2,18 @@ schema_version: 1
 
 context:
   name: rlic
-  version: "0.5.3"
+  version: "0.5.4"
 
 package:
   name: ${{ name|lower }}
   version: ${{ version }}
 
 source:
-  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/rlic-${{ version }}.tar.gz
-  sha256: a5a249df38d3cf9203a6cd5ff4e585db1a2c95ea0e2e5f8365025f348ada96e9
+  url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/rlic-${{ version }}.tar.gz
+  sha256: 8445147f3eeab6eeb30237946992fb8e644c03deb15210d5b59aa1342b81aa6e
 
 build:
-  number: 1
+  number: 0
   skip: is_abi3 and not is_python_min
   python:
     version_independent: ${{ true if is_abi3 }}
@@ -36,13 +36,11 @@ requirements:
     - if: is_abi3
       then: python-abi3
     - python
-    - maturin >=1.0,<2.0
+    - maturin >=1.10,<2.0
     - pip
   run:
     - python
-    - numpy >=1.22.0
-    - if: match(python, "<3.11")
-      then: exceptiongroup >=1.0.0
+    - numpy >=1.23.6
 
 tests:
   - python:
@@ -59,6 +57,7 @@ tests:
       run:
         - pip
         - pytest
+        - runtime-introspect
         - if: is_abi3
           then: abi3audit
     script:
