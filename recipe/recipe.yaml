@@ -40,7 +40,7 @@ requirements:
     - pip
   run:
     - python
-    - numpy >=1.23.6
+    - numpy >=1.23.2
 
 tests:
   - python:
