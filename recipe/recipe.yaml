@@ -2,7 +2,7 @@ schema_version: 1
 
 context:
   name: rlic
-  version: "0.5.4"
+  version: "0.5.6"
 
 package:
   name: ${{ name|lower }}
@@ -10,7 +10,7 @@ package:
 
 source:
   url: https://files.pythonhosted.org/packages/source/${{ name[0] }}/${{ name }}/rlic-${{ version }}.tar.gz
-  sha256: 8445147f3eeab6eeb30237946992fb8e644c03deb15210d5b59aa1342b81aa6e
+  sha256: 7c3fe035fa0079b956af83967654a9b679ebe3c64009ef7d16faa3f36079a421
 
 build:
   number: 0
@@ -21,9 +21,9 @@ build:
 requirements:
   build:
     - if: build_platform != target_platform
-      then: python
-    - if: build_platform != target_platform
-      then: cross-python_${{ target_platform }}
+      then:
+        - python
+        - cross-python_${{ target_platform }}
     - ${{ stdlib('c') }}
     - ${{ compiler('c') }}
     - ${{ compiler('cxx') }}
@@ -40,7 +40,7 @@ requirements:
     - pip
   run:
     - python
-    - numpy >=1.23.6
+    - numpy >=1.23.2
 
 tests:
   - python:
